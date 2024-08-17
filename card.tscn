@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbhd0062gy7fg"]
+
+[ext_resource type="Script" path="res://Card.cs" id="1_lf2vv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oeknu"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_color = Color(0, 0, 0, 0.796078)
+
+[node name="PanelContainer" type="PanelContainer" node_paths=PackedStringArray("valueLabel", "pipLabel")]
+offset_right = 100.0
+offset_bottom = 150.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_oeknu")
+script = ExtResource("1_lf2vv")
+valueLabel = NodePath("Control/Value")
+pipLabel = NodePath("Control/Pip")
+
+[node name="Control" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Value" type="Label" parent="Control"]
+layout_mode = 2
+text = "K"
+
+[node name="Pip" type="Label" parent="Control"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 50
+text = "♣"
+horizontal_alignment = 1
+vertical_alignment = 1
