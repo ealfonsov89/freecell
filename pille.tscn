@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://2014oc0tx6nr"]
+
+[ext_resource type="Script" path="res://Pile.cs" id="1_psdnr"]
+
+[node name="Cell" type="VBoxContainer"]
+custom_minimum_size = Vector2(100, 150)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -50.0
+offset_right = 50.0
+offset_bottom = 401.0
+grow_horizontal = 2
+size_flags_vertical = 0
+theme_override_constants/separation = -105
+script = ExtResource("1_psdnr")
+cardMargin = 0
