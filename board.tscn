@@ -90,3 +90,12 @@ layout_mode = 2
 
 [node name="Pile8" parent="VBoxContainer/DeckHBoxContainer" instance=ExtResource("3_j8t7l")]
 layout_mode = 2
+
+[connection signal="Selected" from="VBoxContainer/DeckHBoxContainer/Pile" to="." method="OnPileSelected"]
+[connection signal="Selected" from="VBoxContainer/DeckHBoxContainer/Pile2" to="." method="OnPileSelected"]
+[connection signal="Selected" from="VBoxContainer/DeckHBoxContainer/Pile3" to="." method="OnPileSelected"]
+[connection signal="Selected" from="VBoxContainer/DeckHBoxContainer/Pile4" to="." method="OnPileSelected"]
+[connection signal="Selected" from="VBoxContainer/DeckHBoxContainer/Pile5" to="." method="OnPileSelected"]
+[connection signal="Selected" from="VBoxContainer/DeckHBoxContainer/Pile6" to="." method="OnPileSelected"]
+[connection signal="Selected" from="VBoxContainer/DeckHBoxContainer/Pile7" to="." method="OnPileSelected"]
+[connection signal="Selected" from="VBoxContainer/DeckHBoxContainer/Pile8" to="." method="OnPileSelected"]

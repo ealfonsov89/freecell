@@ -14,4 +14,3 @@ grow_horizontal = 2
 size_flags_vertical = 0
 theme_override_constants/separation = -105
 script = ExtResource("1_psdnr")
-cardMargin = 0

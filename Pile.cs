@@ -1,27 +1,62 @@
 namespace FreeCell.Card;
 
 using Godot;
+using Godot.Collections;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+
 
 public partial class Pile : Container
 {
-	[Export]
-	private int cardMargin = 110;
-	private List<Card> cards = new();
+	[Signal]
+	public delegate void SelectedEventHandler(Pile pile, Array<Card> cards);
+	private readonly List<Card> cards = new();
+
+
+	internal void RemoveCard(Card card)
+	{
+		card.GuiInput -= OnFocusEntered;
+		cards.Remove(card);
+		RemoveChild(card);
+	}
 
 	public void AddCard(Card card)
 	{
+		card.GuiInput += OnFocusEntered;
 		cards.Add(card);
 		AddChild(card);
 	}
 
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+	private void OnFocusEntered(InputEvent @event)
 	{
+		if (@event is InputEventMouseButton mouseButton && mouseButton.ButtonIndex == MouseButton.Left && mouseButton.Pressed)
+		{
+			List<Card> cardsList = SelectCards();
+			EmitSignal(nameof(Selected), new Variant[] { this, new Array<Card>(cardsList) });
+			GD.Print($"Pile emit Selected signal with: {cardsList.Count} cards");
+		}
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	private List<Card> SelectCards()
 	{
+		List<Card> cardsList = new();
+
+		for (int i = cards.Count; i > 0; i--)
+		{
+			Card card = cards[i - 1];
+			if (i == cards.Count || card.Value == cardsList.Last().Value + 1 && card.PipSuit.Suit != cardsList.Last().PipSuit.Suit)
+			{
+				cardsList.Add(card);
+			}
+			else
+			{
+				break;
+			}
+		}
+
+		return cardsList;
 	}
+
+
 }
