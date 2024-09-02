@@ -7,9 +7,9 @@ public partial class Card : Control
 	private PipSuit pipSuit = new(Suit.black, Pip.clubs);
 
 	[Export]
-	public Label valueLabel;
+	public Label? valueLabel;
 	[Export]
-	public Label pipLabel;
+	public Label? pipLabel;
 
 	public PipSuit PipSuit { get => pipSuit; set => pipSuit = value; }
 	public int Value { get => value; set => this.value = value; }
@@ -25,6 +25,10 @@ public partial class Card : Control
 			12 => "K",
 			_ => $"{value + 1}",
 		};
+		if (valueLabel == null || pipLabel == null)
+		{
+			return;
+		}
 		valueLabel.Text = $"{pipText} {valueText}";
 		pipLabel.Text = pipText;
 		Color color = pipSuit.Suit == Suit.red ? new Color(255, 0, 0) : new Color(0, 0, 0);

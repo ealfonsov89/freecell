@@ -2,7 +2,6 @@ namespace FreeCell.Card;
 
 using Godot;
 using Godot.Collections;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,19 +15,19 @@ public partial class Pile : Container
 
 	internal void RemoveCard(Card card)
 	{
-		card.GuiInput -= OnFocusEntered;
+		card.GuiInput -= OnGuiInput;
 		cards.Remove(card);
 		RemoveChild(card);
 	}
 
 	public void AddCard(Card card)
 	{
-		card.GuiInput += OnFocusEntered;
+		card.GuiInput += OnGuiInput;
 		cards.Add(card);
 		AddChild(card);
 	}
 
-	private void OnFocusEntered(InputEvent @event)
+	private void OnGuiInput(InputEvent @event)
 	{
 		if (@event is InputEventMouseButton mouseButton && mouseButton.ButtonIndex == MouseButton.Left && mouseButton.Pressed)
 		{

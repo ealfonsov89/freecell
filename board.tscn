@@ -1,12 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://bnb3ghmr1qvv7"]
+[gd_scene load_steps=7 format=3 uid="uid://bnb3ghmr1qvv7"]
 
 [ext_resource type="Script" path="res://Deck.cs" id="1_h44w2"]
 [ext_resource type="PackedScene" uid="uid://bbhd0062gy7fg" path="res://card.tscn" id="2_n0bmu"]
+[ext_resource type="PackedScene" uid="uid://dav3bpg3fpju4" path="res://free_cell.tscn" id="3_iwrn7"]
 [ext_resource type="PackedScene" uid="uid://2014oc0tx6nr" path="res://pille.tscn" id="3_j8t7l"]
+[ext_resource type="PackedScene" uid="uid://bvcgrfonfgee6" path="res://pack.tscn" id="4_prtpg"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7ttkr"]
 
-[node name="Board" type="CenterContainer" node_paths=PackedStringArray("drawPiles")]
+[node name="Board" type="CenterContainer" node_paths=PackedStringArray("drawPiles", "freeCells")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -14,6 +16,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_h44w2")
 drawPiles = [NodePath("VBoxContainer/DeckHBoxContainer/Pile"), NodePath("VBoxContainer/DeckHBoxContainer/Pile2"), NodePath("VBoxContainer/DeckHBoxContainer/Pile3"), NodePath("VBoxContainer/DeckHBoxContainer/Pile4"), NodePath("VBoxContainer/DeckHBoxContainer/Pile5"), NodePath("VBoxContainer/DeckHBoxContainer/Pile6"), NodePath("VBoxContainer/DeckHBoxContainer/Pile7"), NodePath("VBoxContainer/DeckHBoxContainer/Pile8")]
+freeCells = [NodePath(""), NodePath(""), NodePath(""), NodePath("")]
 cardNodePad = ExtResource("2_n0bmu")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -24,20 +27,16 @@ theme_override_constants/separation = 10
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Cell2" type="PanelContainer" parent="VBoxContainer/FreeCellHBoxContainer"]
-custom_minimum_size = Vector2(100, 150)
+[node name="FreeCell" parent="VBoxContainer/FreeCellHBoxContainer" instance=ExtResource("3_iwrn7")]
 layout_mode = 2
 
-[node name="Cell3" type="PanelContainer" parent="VBoxContainer/FreeCellHBoxContainer"]
-custom_minimum_size = Vector2(100, 150)
+[node name="FreeCell2" parent="VBoxContainer/FreeCellHBoxContainer" instance=ExtResource("3_iwrn7")]
 layout_mode = 2
 
-[node name="Cell4" type="PanelContainer" parent="VBoxContainer/FreeCellHBoxContainer"]
-custom_minimum_size = Vector2(100, 150)
+[node name="FreeCell3" parent="VBoxContainer/FreeCellHBoxContainer" instance=ExtResource("3_iwrn7")]
 layout_mode = 2
 
-[node name="Cell5" type="PanelContainer" parent="VBoxContainer/FreeCellHBoxContainer"]
-custom_minimum_size = Vector2(100, 150)
+[node name="FreeCell4" parent="VBoxContainer/FreeCellHBoxContainer" instance=ExtResource("3_iwrn7")]
 layout_mode = 2
 
 [node name="EmprtyCell" type="PanelContainer" parent="VBoxContainer/FreeCellHBoxContainer"]
@@ -45,20 +44,7 @@ custom_minimum_size = Vector2(100, 150)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_7ttkr")
 
-[node name="Cell6" type="PanelContainer" parent="VBoxContainer/FreeCellHBoxContainer"]
-custom_minimum_size = Vector2(100, 150)
-layout_mode = 2
-
-[node name="Cell7" type="PanelContainer" parent="VBoxContainer/FreeCellHBoxContainer"]
-custom_minimum_size = Vector2(100, 150)
-layout_mode = 2
-
-[node name="Cell8" type="PanelContainer" parent="VBoxContainer/FreeCellHBoxContainer"]
-custom_minimum_size = Vector2(100, 150)
-layout_mode = 2
-
-[node name="Cell9" type="PanelContainer" parent="VBoxContainer/FreeCellHBoxContainer"]
-custom_minimum_size = Vector2(100, 150)
+[node name="Pack" parent="VBoxContainer/FreeCellHBoxContainer" instance=ExtResource("4_prtpg")]
 layout_mode = 2
 
 [node name="DeckHBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
@@ -91,6 +77,11 @@ layout_mode = 2
 [node name="Pile8" parent="VBoxContainer/DeckHBoxContainer" instance=ExtResource("3_j8t7l")]
 layout_mode = 2
 
+[connection signal="Selected" from="VBoxContainer/FreeCellHBoxContainer/FreeCell" to="." method="OnFreeCellSelected"]
+[connection signal="Selected" from="VBoxContainer/FreeCellHBoxContainer/FreeCell2" to="." method="OnFreeCellSelected"]
+[connection signal="Selected" from="VBoxContainer/FreeCellHBoxContainer/FreeCell3" to="." method="OnFreeCellSelected"]
+[connection signal="Selected" from="VBoxContainer/FreeCellHBoxContainer/FreeCell4" to="." method="OnFreeCellSelected"]
+[connection signal="Selected" from="VBoxContainer/FreeCellHBoxContainer/Pack" to="." method="OnPackSelected"]
 [connection signal="Selected" from="VBoxContainer/DeckHBoxContainer/Pile" to="." method="OnPileSelected"]
 [connection signal="Selected" from="VBoxContainer/DeckHBoxContainer/Pile2" to="." method="OnPileSelected"]
 [connection signal="Selected" from="VBoxContainer/DeckHBoxContainer/Pile3" to="." method="OnPileSelected"]

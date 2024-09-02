@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dav3bpg3fpju4"]
+
+[ext_resource type="Script" path="res://FreeCell.cs" id="1_foqlh"]
+
+[node name="FreeCell" type="PanelContainer"]
+custom_minimum_size = Vector2(100, 150)
+script = ExtResource("1_foqlh")
