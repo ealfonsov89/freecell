@@ -4,7 +4,7 @@ namespace FreeCell.Card;
 public partial class FreeCell : PanelContainer
 {
 	[Signal]
-	public delegate void SelectedEventHandler(FreeCell freeCell);
+	public delegate void SelectedEventHandler(FreeCell freeCell, Card? card);
 	private Card? card;
 
 	public override void _Ready()
@@ -39,7 +39,14 @@ public partial class FreeCell : PanelContainer
 	{
 		if (@event is InputEventMouseButton mouseButton && mouseButton.ButtonIndex == MouseButton.Left && mouseButton.Pressed)
 		{
-			EmitSignal(nameof(Selected), new Variant[] { this });
+			if (card == null)
+			{
+				EmitSignal(nameof(Selected), new Variant[] { this });
+			}
+			else
+			{
+				EmitSignal(nameof(Selected), new Variant[] { this, card });
+			}
 			GD.Print($"FreeCell emit Selected signal");
 		}
 	}

@@ -50,7 +50,7 @@ public partial class Deck : Node
         cardsToMoveAmount--;
     }
 
-    public void OnFreeCellSelected(FreeCell freeCell)
+    public void OnFreeCellSelected(FreeCell freeCell, Card? card)
     {
         if (freeCell.IsEmpty())
         {
